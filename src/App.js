@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import app from "./components/App";
+import CreateSurvey from "./components/CreateSurvey";
+import TakeSurvey from "./components/TakeSurvey";
+import Publish from "./components/Publish";
+import Singleselect from "./components/Singleselect";
+import Multiselect from "./components/Multiselect";
+import { ContextQuestions } from "./components/SurveyContext";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <ContextQuestions>
+          <Switch>
+            <Route exact path="/" component={app}></Route>
+            <Route exact path="/createsurvey" component={CreateSurvey}></Route>
+            <Route exact path="/takesurvey" component={TakeSurvey}></Route>
+            <Route exact path="/publish" component={Publish}></Route>
+            <Route
+              exact
+              path="/createsurvey/singleselect"
+              component={Singleselect}
+            ></Route>
+            <Route
+              exact
+              path="/createsurvey/multiselect"
+              component={Multiselect}
+            ></Route>
+          </Switch>
+        </ContextQuestions>
+      </Router>
+    </>
   );
 }
-
-export default App;
