@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { useToasts } from "react-toast-notifications";
 import { Link } from "react-router-dom";
 import logo from "../logo.png";
 import { SurveyContext } from "./SurveyContext";
@@ -7,6 +8,23 @@ import "../css/App.css";
 
 export default function Publish() {
   const [survey] = useContext(SurveyContext);
+  const { addToast } = useToasts();
+  useEffect(() => {
+    if(survey.length === 0)
+    {
+      addToast("Please Enter Some Questions", {
+        appearance: "warning",
+        autoDismiss: true,
+      });
+    }
+  }, []);
+
+  const handleClick = () => {
+    addToast("Successfully Created Survey", {
+      appearance: "success",
+      autoDismiss: true,
+    });
+  }
 
   return (
     <>
@@ -62,6 +80,7 @@ export default function Publish() {
                   border: "1px solid black",
                   borderRadius: "3px",
                 }}
+                onClick={handleClick}
               >
                 Confirm
               </button>
