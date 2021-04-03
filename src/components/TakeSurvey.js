@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
 import logo from "../logo.png";
 import { SurveyContext } from "./SurveyContext";
 import "../css/showquestion.css";
@@ -8,7 +9,13 @@ import "../css/takesurvey.css";
 
 export default function TakeSurvey() {
   const [survey] = useContext(SurveyContext);
-
+  const { addToast } = useToasts();
+  const handleSubmit = () => {
+    addToast("Successfully Submitted Survey", {
+      appearance: "success",
+      autoDismiss: true,
+    });
+  };
   return (
     <>
       <Link to="/">
@@ -86,6 +93,7 @@ export default function TakeSurvey() {
                   border: "1px solid black",
                   borderRadius: "3px",
                 }}
+                onClick={handleSubmit}
               >
                 Submit
               </button>
