@@ -10,8 +10,7 @@ export default function Publish() {
   const [survey] = useContext(SurveyContext);
   const { addToast } = useToasts();
   useEffect(() => {
-    if(survey.length === 0)
-    {
+    if (survey.length === 0) {
       addToast("Please Enter Some Questions", {
         appearance: "warning",
         autoDismiss: true,
@@ -24,7 +23,7 @@ export default function Publish() {
       appearance: "success",
       autoDismiss: true,
     });
-  }
+  };
 
   return (
     <>
@@ -71,20 +70,36 @@ export default function Publish() {
             );
           })}
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <Link to="/">
-              <button
-                style={{
-                  padding: "4px",
-                  backgroundColor: "brown",
-                  color: "white",
-                  border: "1px solid black",
-                  borderRadius: "3px",
-                }}
-                onClick={handleClick}
-              >
-                Confirm
-              </button>
-            </Link>
+            {survey.length === 0 ? (
+              <Link to="/createsurvey">
+                <button
+                  style={{
+                    padding: "4px",
+                    backgroundColor: "brown",
+                    color: "white",
+                    border: "1px solid black",
+                    borderRadius: "3px",
+                  }}
+                >
+                  Back
+                </button>
+              </Link>
+            ) : (
+              <Link to="/">
+                <button
+                  style={{
+                    padding: "4px",
+                    backgroundColor: "brown",
+                    color: "white",
+                    border: "1px solid black",
+                    borderRadius: "3px",
+                  }}
+                  onClick={handleClick}
+                >
+                  Confirm
+                </button>
+              </Link>
+            )}
           </div>
         </div>
       </div>
